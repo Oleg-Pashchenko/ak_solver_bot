@@ -44,8 +44,16 @@ async def echo_handler(message: types.Message) -> None:
     try:
         # Send a copy of the received message
         start = time.time()
-        answer = gpt.run(message.text)
-        await message.answer(f'{answer}\n\nExecution time: {round(time.time() - start, 2)}')
+        messages = [
+            {'role': 'system', 'content': "Отвечай на вопрос"},
+           # {"role": "system", "content": open('context/test.txt', 'r', encoding='UTF-8').read()},
+            {"role": "user", "content": message.text}
+        ]
+        for i in range(5):
+            answer = gpt.run(messages)
+            await message.answer(f'{answer}\n\nExecution time: {round(time.time() - start, 2)}')
+            messages.append({'role': 'assistant', 'content': answer})
+            messages.append({'role': 'user', 'content': 'расскажи еще'})
     except TypeError:
         # But not all the types is supported to be copied so need to handle it
         await message.answer("Nice try!")

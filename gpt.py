@@ -9,14 +9,10 @@ dotenv.load_dotenv()
 client = openai.OpenAI(api_key=os.getenv('OPENAI_KEY'))
 
 
-def run(question: str):
+def run(messages):
     response = client.chat.completions.create(
         model="gpt-4",
-        messages=[
-            {'role': 'system', 'content': "Отвечай на вопрос"},
-           # {"role": "system", "content": open('context/test.txt', 'r', encoding='UTF-8').read()},
-            {"role": "user", "content": question}
-        ])
+        messages=messages)
     return response.choices[0].message.content
 
 

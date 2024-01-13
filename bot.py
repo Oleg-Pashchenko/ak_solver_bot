@@ -45,12 +45,12 @@ async def echo_handler(message: types.Message) -> None:
         # Send a copy of the received message
         start = time.time()
         messages = [
-            {'role': 'system', 'content': "Отвечай на вопрос около 5 секунд подробно" },
-            {"role": "system", "content": open('context/test.txt', 'r', encoding='UTF-8').read()},
+            {'role': 'system', 'content': "Отвечай на вопрос около 5 секунд" },
+           # {"role": "system", "content": open('context/test.txt', 'r', encoding='UTF-8').read()},
             {"role": "user", "content": message.text}
         ]
-        for i in range(7):
-            answer = gpt.run(messages)
+        for i in range(5):
+            answer = await gpt.run(messages)
             await message.answer(f'{answer}\n\nExecution time: {round(time.time() - start, 2)}')
             messages.append({'role': 'assistant', 'content': answer})
             messages.append({'role': 'user', 'content': 'расскажи еще'})

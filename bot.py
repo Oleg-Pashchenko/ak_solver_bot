@@ -45,7 +45,7 @@ async def echo_handler(message: types.Message) -> None:
         # Send a copy of the received message
         start = time.time()
         messages = [
-            {'role': 'system', 'content': "Отвечай на вопрос"},
+            {'role': 'system', 'content': "Отвечай на вопрос не дольше 5 секунд" },
            # {"role": "system", "content": open('context/test.txt', 'r', encoding='UTF-8').read()},
             {"role": "user", "content": message.text}
         ]

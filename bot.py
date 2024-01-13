@@ -51,7 +51,7 @@ async def echo_handler(message: types.Message) -> None:
         ]
         for i in range(5):
             answer = await gpt.run(messages)
-            await message.answer(f'{answer}\n\nExecution time: {round(time.time() - start, 2)}')
+            await message.answer(f'[{i + 1} / 5] {answer}\n\nExecution time: {round(time.time() - start, 2)}')
             messages.append({'role': 'assistant', 'content': answer})
             messages.append({'role': 'user', 'content': 'расскажи еще'})
     except TypeError:

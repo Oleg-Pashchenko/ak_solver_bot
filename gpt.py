@@ -13,7 +13,7 @@ def run(question: str):
     response = client.chat.completions.create(
         model="gpt-4",
         messages=[
-            {'role': 'system', 'content': "Отвечай на вопрос максимально подробно"},
+            {'role': 'system', 'content': "Отвечай на вопрос максимально быстро"},
            # {"role": "system", "content": open('context/test.txt', 'r', encoding='UTF-8').read()},
             {"role": "user", "content": question}
         ])
